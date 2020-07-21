@@ -10,8 +10,11 @@ body {
 
 .cell {
   height: 122px;
-  background: rgb(202, 194, 149);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   margin: 1px;
+  background: rgb(202, 194, 149);
   border: rgb(109, 109, 109) 2px solid;
 }
 
