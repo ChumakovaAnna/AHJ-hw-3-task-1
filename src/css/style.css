@@ -1,0 +1,17 @@
+body {
+  background: #eee;
+  text-align: center;
+}
+
+.container {
+  width: 491px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cell {
+  height: 122px;
+  background: rgb(202, 194, 149);
+  margin: 1px;
+  border: rgb(109, 109, 109) 2px solid;
+}
