@@ -26,6 +26,9 @@ export default class GamePlay {
   drawUi() {
     this.checkBinding();
 
+    const maxWidth = (this.boardSize * 122) + 24;
+    console.log(maxWidth);
+    this.container.style.maxWidth = `${maxWidth}px`;
     this.container.innerHTML = `
     <div class="grid-${this.boardSize}-center-noGutter" data-id="board"></div>
     `;
