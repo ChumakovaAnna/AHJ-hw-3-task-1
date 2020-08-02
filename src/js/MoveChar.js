@@ -2,8 +2,8 @@
  * Класс для появления персонажа на поле
  */
 export default class MoveChar {
-  constructor(gameDraw, char) {
-    this.gameDraw = gameDraw;
+  constructor(gamePlay, char) {
+    this.gamePlay = gamePlay;
     this.indexCell = null;
     this.char = char;
   }
@@ -12,7 +12,7 @@ export default class MoveChar {
    * Получение случайного индекса
    */
   getIndex() {
-    return Math.floor(Math.random() * (this.gameDraw.getBorderSize() ** 2));
+    return Math.floor(Math.random() * (this.gamePlay.getBorderSize() ** 2));
   }
 
   /**
@@ -40,7 +40,7 @@ export default class MoveChar {
    * Рисует поле с персонажем с заданным интервалом
    */
   movingCharSetInterval(interval = 1000) {
-    this.gameDraw.drawUi();
+    this.gamePlay.drawUi();
     this.movingChar();
     // setInterval(() => {
     //   this.movingChar();
