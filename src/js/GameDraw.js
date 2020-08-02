@@ -1,5 +1,5 @@
 /**
- * Класс для работы с игровым полем
+ * Класс для прорисовки игрового пространства
  */
 export default class GamePlay {
   constructor(number = 4) {
@@ -7,6 +7,7 @@ export default class GamePlay {
     this.container = null;
     this.cells = null;
     this.boardEl = null;
+    this.maxWidth = null;
   }
 
   /**
@@ -25,10 +26,10 @@ export default class GamePlay {
    */
   drawUi() {
     this.checkBinding();
+    this.getMaxWidthContainer();
+    // this.container.addEventListener("click", (event) => catchChar(event));
 
-    const maxWidth = (this.boardSize * 122) + 24;
-    console.log(maxWidth);
-    this.container.style.maxWidth = `${maxWidth}px`;
+    this.container.style.maxWidth = this.maxWidth;
     this.container.innerHTML = `
     <div class="grid-${this.boardSize}-center-noGutter" data-id="board"></div>
     `;
@@ -39,6 +40,14 @@ export default class GamePlay {
       cellEl.innerHTML = `<div class="cell" data-id="cell_${i}"></div>`;
       this.boardEl.insertAdjacentElement("beforeEnd", cellEl);
     }
+  }
+
+  /**
+   * Находим и получаем максимальную ширину контейнера в пикселях,
+   * зависящую от размера поля в клетках
+   */
+  getMaxWidthContainer() {
+    this.maxWidth = `${(this.boardSize * 122) + 24}px`;
   }
 
   /**
