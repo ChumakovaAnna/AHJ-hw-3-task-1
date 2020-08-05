@@ -15,11 +15,4 @@ export default class Char {
     this.char.src = "src/img/goblin.png";
     this.char.alt = "goblin";
   }
-
-  /**
-   * Получение персонажа
-   */
-  getChar() {
-    return this.char;
-  }
 }
