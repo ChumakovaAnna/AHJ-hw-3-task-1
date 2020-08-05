@@ -1,13 +1,19 @@
-import GamePlay from "./GamePlay";
-import Char from "./Char";
+import GamePlayDraw from "./GamePlayDraw";
+import GameState from "./GameState";
 import MoveChar from "./MoveChar";
+import GameStateDraw from "./GameStateDraw";
 
-console.log("it works!");
+console.log("The game started");
 
-const gamePlay = new GamePlay();
-gamePlay.bindToDOM(document.querySelector(".container"));
-const char = new Char();
-char.creatChar();
+const gamePlayDraw = new GamePlayDraw();
+gamePlayDraw.bindToDOM(document.querySelector(".container"));
 
-const moveChar = new MoveChar(gamePlay, char.getChar());
+const gameState = new GameState();
+
+const stateDraw = new GameStateDraw(gameState);
+stateDraw.bindToDOM(document.querySelector(".score"));
+stateDraw.findAllEl();
+
+const moveChar = new MoveChar(gamePlayDraw, gameState, stateDraw);
+moveChar.addClick();
 moveChar.movingCharSetInterval();
