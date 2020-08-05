@@ -1,6 +1,25 @@
 body {
   background: #eee;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.score {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: rgb(131, 133, 128);
+}
+
+.score_title {
+  margin: 0 0 10px 0;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+}
+
+.score_text {
+  text-align: start;
 }
 
 .container {

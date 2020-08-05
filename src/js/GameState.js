@@ -1,0 +1,47 @@
+/**
+ * Класс для отслеживания состояния игры
+ */
+export default class GameState {
+  constructor() {
+    this.hit = 0;
+    this.miss = 0;
+    this.move = 0;
+    this.finish = false;
+    this.victory = false;
+  }
+
+  /**
+   * Метод для проверки количества попаданий, промахов и показов. Должно быть не более 5.
+   */
+  checkAttempt(item) {
+    if (item >= 5) {
+      this.gameOff();
+    }
+  }
+
+  /**
+   * Метод для проверки, чтобы количество показов персонажа было не меньше 0
+   */
+  checkMoveMin() {
+    if (this.move < 0) {
+      this.move = 0;
+    }
+  }
+
+  /**
+   * Метод для окончание игры
+   */
+  gameOff() {
+    this.finish = true;
+  }
+
+  /**
+   * Победа и проигрыш
+   */
+  checkedVictory() {
+    if (this.hit >= 5 && this.finish === true) {
+      this.victory = true;
+      console.log("Victory!");
+    }
+  }
+}
