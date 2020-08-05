@@ -1,7 +1,10 @@
 /**
  * Класс для прорисовки игрового пространства
  */
-export default class GamePlay {
+export default class GamePlayDraw {
+  /**
+   * @param  {number} number = 4 - число клеток по одной стороне игрового поля
+   */
   constructor(number = 4) {
     this.boardSize = number;
     this.container = null;
@@ -55,7 +58,7 @@ export default class GamePlay {
    */
   checkBinding() {
     if (this.container === null) {
-      throw new Error("GamePlay not bind to DOM");
+      throw new Error("GamePlayDraw not bind to DOM");
     }
   }
 
