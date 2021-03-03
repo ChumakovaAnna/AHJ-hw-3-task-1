@@ -34,7 +34,7 @@ export default class GamePlayDraw {
 
     this.container.style.maxWidth = this.maxWidth;
     this.container.innerHTML = `
-    <div class="grid-${this.boardSize}-center-noGutter" data-id="board"></div>
+      <div class="grid-${this.boardSize}-center-noGutter" data-id="board"></div>
     `;
     this.boardEl = this.container.querySelector("[data-id=board]");
     for (let i = 0; i < this.boardSize ** 2; i += 1) {
