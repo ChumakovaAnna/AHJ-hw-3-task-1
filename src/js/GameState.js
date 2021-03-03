@@ -33,6 +33,7 @@ export default class GameState {
    */
   gameOff() {
     this.finish = true;
+    console.log("Game over!");
   }
 
   /**
@@ -42,6 +43,10 @@ export default class GameState {
     if (this.hit >= 5 && this.finish === true) {
       this.victory = true;
       console.log("Victory!");
+    }
+
+    if (this.finish === true && this.miss >= 5) {
+      console.log("You lose!");
     }
   }
 }
