@@ -1,15 +1,15 @@
 /**
  * Класс для прорисовки статуса игры на странице
  */
-export default class GameStateDraw {
+export default class StateRenderer {
   /**
    * @param  {} gameState - класс для отслеживания состояния игры
    */
   constructor(gameState) {
     this.gameState = gameState;
     this.container = null;
-    this.hitEl = null;
-    this.missEl = null;
+    this.hitElement = null;
+    this.missElement = null;
   }
 
   /**
@@ -34,33 +34,34 @@ export default class GameStateDraw {
 
   /**
    * Прорисовывает рабочее поле
+   * renderUi
    */
-  drawUi() {
+  renderUi() {
     this.checkBinding();
-    this.hitEl.innerHTML = this.gameState.hit;
-    this.missEl.innerText = this.gameState.miss;
-    this.gameState.checkedVictory();
+    this.hitElement.innerHTML = this.gameState.hit;
+    this.missElement.innerText = this.gameState.miss;
+    this.gameState.checkVictory();
   }
 
   /**
    * Находим HTML-элемент для количества попаданий
    */
-  findHitEl() {
-    this.hitEl = this.container.querySelector(".hit_number");
+  findHitElement() {
+    this.hitElement = this.container.querySelector(".hit_number");
   }
 
   /**
    * Находим HTML-элемент для количества промахов
    */
-  findMissEl() {
-    this.missEl = this.container.querySelector(".miss_number");
+  findMissElement() {
+    this.missElement = this.container.querySelector(".miss_number");
   }
 
   /**
    * Находим все HTML-элементы для отображения статистики
    */
-  findAllEl() {
-    this.findHitEl();
-    this.findMissEl();
+  bindCounters() {
+    this.findHitElement();
+    this.findMissElement();
   }
 }

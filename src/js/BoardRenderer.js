@@ -1,12 +1,12 @@
 /**
  * Класс для прорисовки игрового пространства
  */
-export default class GamePlayDraw {
+export default class BoardRenderer {
   /**
-   * @param  {number} number = 4 - число клеток по одной стороне игрового поля
+   * @param  {number} boardSize = 4 - число клеток по одной стороне игрового поля
    */
-  constructor(number = 4) {
-    this.boardSize = number;
+  constructor(boardSize = 4) {
+    this.boardSize = boardSize;
     this.container = null;
     this.cells = null;
     this.boardEl = null;
@@ -27,9 +27,9 @@ export default class GamePlayDraw {
   /**
    * Прорисовывает рабочее поле
    */
-  drawUi() {
+  renderUi() {
     this.checkBinding();
-    this.getMaxWidthContainer();
+    this.getBoardMaxWidth();
     // this.container.addEventListener("click", (event) => catchChar(event));
 
     this.container.style.maxWidth = this.maxWidth;
@@ -49,7 +49,7 @@ export default class GamePlayDraw {
    * Находим и получаем максимальную ширину контейнера в пикселях,
    * зависящую от размера поля в клетках
    */
-  getMaxWidthContainer() {
+  getBoardMaxWidth() {
     this.maxWidth = `${(this.boardSize * 122) + 24}px`;
   }
 
@@ -65,7 +65,7 @@ export default class GamePlayDraw {
   /**
    * Возвращает размер поля по одной стороне
    */
-  getBorderSize() {
+  getBoardSize() {
     return this.boardSize;
   }
 }

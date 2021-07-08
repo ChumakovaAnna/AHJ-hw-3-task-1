@@ -8,6 +8,8 @@ export default class GameState {
     this.move = 0;
     this.finish = false;
     this.victory = false;
+    // был ли клик в этом ходу
+    this.clickThisTern = false;
   }
 
   /**
@@ -15,7 +17,7 @@ export default class GameState {
    */
   checkAttempt(item) {
     if (item >= 5) {
-      this.gameOff();
+      this.gameOver();
     }
   }
 
@@ -31,7 +33,7 @@ export default class GameState {
   /**
    * Метод для окончание игры
    */
-  gameOff() {
+  gameOver() {
     this.finish = true;
     console.log("Game over!");
   }
@@ -39,7 +41,7 @@ export default class GameState {
   /**
    * Победа и проигрыш
    */
-  checkedVictory() {
+  checkVictory() {
     if (this.hit >= 5 && this.finish === true) {
       this.victory = true;
       console.log("Victory!");

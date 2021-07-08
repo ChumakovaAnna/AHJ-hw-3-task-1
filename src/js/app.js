@@ -1,19 +1,19 @@
-import GamePlayDraw from "./GamePlayDraw";
+import BoardRenderer from "./BoardRenderer";
 import GameState from "./GameState";
-import MoveChar from "./MoveChar";
-import GameStateDraw from "./GameStateDraw";
+import CharacterMoving from "./CharacterMoving";
+import StateRenderer from "./StateRenderer";
 
 console.log("The game started");
 
-const gamePlayDraw = new GamePlayDraw();
-gamePlayDraw.bindToDOM(document.querySelector(".container"));
+const boardRenderer = new BoardRenderer();
+boardRenderer.bindToDOM(document.querySelector(".container"));
 
 const gameState = new GameState();
 
-const stateDraw = new GameStateDraw(gameState);
-stateDraw.bindToDOM(document.querySelector(".score"));
-stateDraw.findAllEl();
+const stateRenderer = new StateRenderer(gameState);
+stateRenderer.bindToDOM(document.querySelector(".score"));
+stateRenderer.bindCounters();
 
-const moveChar = new MoveChar(gamePlayDraw, gameState, stateDraw);
-moveChar.addClick();
-moveChar.movingCharSetInterval();
+const characterMoving = new CharacterMoving(boardRenderer, gameState, stateRenderer);
+characterMoving.addClickListener();
+characterMoving.movingCharSetInterval();

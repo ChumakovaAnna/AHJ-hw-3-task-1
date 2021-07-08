@@ -1,15 +1,15 @@
-import Char from "./Char";
+import Character from "./Character";
 /**
  * Класс для перемещение персонажа на поле
  */
-export default class MoveChar {
+export default class CharacterMoving {
   /**
-   * @param  {} gamePlayDraw класс для прорисовки игрового поля
+   * @param  {} boardRenderer класс для прорисовки игрового поля
    * @param  {} gameState класс для отслеживания состояния игры
    */
-  constructor(gamePlayDraw, gameState, gameStateDraw) {
-    this.gamePlayDraw = gamePlayDraw;
-    this.char = null;
+  constructor(boardRenderer, gameState, gameStateDraw) {
+    this.boardRenderer = boardRenderer;
+    this.character = null;
     this.gameState = gameState;
     this.stateDraw = gameStateDraw;
     this.indexCell = null;
@@ -18,25 +18,25 @@ export default class MoveChar {
   /**
    * Создание персонажа
    */
-  createdNewChar() {
-    this.char = new Char();
-    this.char.creatChar();
+  createNewCharacter() {
+    this.character = new Character();
+    this.character.creatCharacter();
   }
 
   /**
    * Получение случайного индекса
    */
-  getIndex() {
-    return Math.floor(Math.random() * (this.gamePlayDraw.getBorderSize() ** 2));
+  getRandomIndex() {
+    return Math.floor(Math.random() * (this.boardRenderer.getBoardSize() ** 2));
   }
 
   /**
    * Получение неповторяющегося индекса
    */
-  getNewIndex() {
-    let index = this.getIndex();
+  getUniqueIndex() {
+    let index = this.getRandomIndex();
     if (this.indexCell === index) {
-      index = this.getIndex();
+      index = this.getRandomIndex();
     }
     this.indexCell = index;
   }
@@ -45,26 +45,28 @@ export default class MoveChar {
    * Прорисовка персонажа на поле
    * Останавливаем игру, если количество показов без кликов больше 5
    */
-  movingChar() {
-    this.stateDraw.drawUi();
-    this.getNewIndex();
+  moveCharacter() {
+    this.stateDraw.renderUi();
+    this.getUniqueIndex();
     const idCell = `[data-id=cell_${this.indexCell}]`;
     const cell = document.querySelector(idCell);
+    this.gameState.clickThisTern = false;
     this.gameState.move += 1;
     this.gameState.checkAttempt(this.gameState.move);
     cell.insertAdjacentElement("beforeEnd", this.char.char);
+    console.log(`click ${this.gameState.click}`);
   }
 
   /**
    * Рисует поле с персонажем с заданным интервалом
    * @param {number} interval -интервал, с каким будет показан персонаж на поле
    */
-  movingCharSetInterval(interval = 1000) {
-    this.gamePlayDraw.drawUi();
-    this.createdNewChar();
-    this.movingChar();
+  movingCharSetInterval(interval = 3000) {
+    this.boardRenderer.renderUi();
+    this.createNewCharacter();
+    this.moveCharacter();
     const jump = setInterval(() => {
-      this.movingChar();
+      this.moveCharacter();
       if (this.gameState.finish === true) {
         clearInterval(jump);
       }
@@ -75,26 +77,27 @@ export default class MoveChar {
    * Метод для проверки, поймана ли персонаж
    * @param {*} event - объект, на который произошел click
    */
-  catchChar(event) {
+  catchCharacter(event) {
+    this.gameState.clickThisTern = true;
+
     if (event.target.classList.contains("img_goblin")) {
       this.gameState.hit += 1;
+      this.gameState.checkAttempt(this.gameState.hit);
+    } else {
+      this.gameState.miss += 1;
       this.gameState.move -= 1;
       this.gameState.checkMoveMin();
-      this.gameState.checkAttempt(this.gameState.hit);
-      return;
+      this.gameState.checkAttempt(this.gameState.miss);
     }
-    this.gameState.miss += 1;
-    this.gameState.move -= 1;
-    this.gameState.checkMoveMin();
-    this.gameState.checkAttempt(this.gameState.miss);
   }
 
   /**
    * Метод для навешивания addEvenListener на игровое поле для ловли персонажа
+   * addClickListener
    */
-  addClick() {
-    this.gamePlayDraw.container.addEventListener("click", (event) => {
-      this.catchChar(event);
+  addClickListener() {
+    this.boardRenderer.container.addEventListener("click", (event) => {
+      this.catchCharacter(event);
     });
   }
 }
