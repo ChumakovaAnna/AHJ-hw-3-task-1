@@ -61,7 +61,7 @@ export default class CharacterMoving {
    * Рисует поле с персонажем с заданным интервалом
    * @param {number} interval -интервал, с каким будет показан персонаж на поле
    */
-  movingCharSetInterval(interval = 3000) {
+  moveCharacterSetInterval(interval = 3000) {
     this.boardRenderer.renderUi();
     this.createNewCharacter();
     this.moveCharacter();
@@ -93,7 +93,6 @@ export default class CharacterMoving {
 
   /**
    * Метод для навешивания addEvenListener на игровое поле для ловли персонажа
-   * addClickListener
    */
   addClickListener() {
     this.boardRenderer.container.addEventListener("click", (event) => {

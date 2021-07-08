@@ -16,4 +16,4 @@ stateRenderer.bindCounters();
 
 const characterMoving = new CharacterMoving(boardRenderer, gameState, stateRenderer);
 characterMoving.addClickListener();
-characterMoving.movingCharSetInterval();
+characterMoving.moveCharacterSetInterval();

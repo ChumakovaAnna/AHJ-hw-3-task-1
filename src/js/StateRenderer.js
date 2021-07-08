@@ -34,7 +34,6 @@ export default class StateRenderer {
 
   /**
    * Прорисовывает рабочее поле
-   * renderUi
    */
   renderUi() {
     this.checkBinding();

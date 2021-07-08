@@ -9,7 +9,7 @@ export default class GameState {
     this.finish = false;
     this.victory = false;
     // был ли клик в этом ходу
-    this.clickThisTern = false;
+    this.clickThisTurn = false;
   }
 
   /**
