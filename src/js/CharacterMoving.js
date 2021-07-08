@@ -46,22 +46,25 @@ export default class CharacterMoving {
    * Останавливаем игру, если количество показов без кликов больше 5
    */
   moveCharacter() {
+    if (this.gameState.move !== -1 && !this.gameState.clickInThisTurn) {
+      this.gameState.miss += 1;
+    }
+
     this.stateDraw.renderUi();
     this.getUniqueIndex();
     const idCell = `[data-id=cell_${this.indexCell}]`;
     const cell = document.querySelector(idCell);
-    this.gameState.clickThisTern = false;
+    this.gameState.clickInThisTurn = false;
     this.gameState.move += 1;
     this.gameState.checkAttempt(this.gameState.move);
-    cell.insertAdjacentElement("beforeEnd", this.char.char);
-    console.log(`click ${this.gameState.click}`);
+    cell.insertAdjacentElement("beforeEnd", this.character.character);
   }
 
   /**
    * Рисует поле с персонажем с заданным интервалом
    * @param {number} interval -интервал, с каким будет показан персонаж на поле
    */
-  moveCharacterSetInterval(interval = 3000) {
+  moveCharacterSetInterval(interval = 1000) {
     this.boardRenderer.renderUi();
     this.createNewCharacter();
     this.moveCharacter();
@@ -78,17 +81,21 @@ export default class CharacterMoving {
    * @param {*} event - объект, на который произошел click
    */
   catchCharacter(event) {
-    this.gameState.clickThisTern = true;
-
-    if (event.target.classList.contains("img_goblin")) {
-      this.gameState.hit += 1;
-      this.gameState.checkAttempt(this.gameState.hit);
+    if (!this.gameState.clickInThisTurn) {
+      if (event.target.classList.contains("img_goblin")) {
+        this.gameState.hit += 1;
+        this.gameState.move -= 1;
+        this.gameState.checkAttempt(this.gameState.hit);
+      } else {
+        this.gameState.miss += 1;
+        this.gameState.move -= 1;
+        this.gameState.checkMoveMin();
+        this.gameState.checkAttempt(this.gameState.miss);
+      }
     } else {
-      this.gameState.miss += 1;
-      this.gameState.move -= 1;
-      this.gameState.checkMoveMin();
-      this.gameState.checkAttempt(this.gameState.miss);
+      console.log("Вы уже кликали");
     }
+    this.gameState.clickInThisTurn = true;
   }
 
   /**

@@ -5,11 +5,11 @@ export default class GameState {
   constructor() {
     this.hit = 0;
     this.miss = 0;
-    this.move = 0;
+    // чтобы ходов было 5 при одном и том же методе checkAttempt
+    this.move = -1;
     this.finish = false;
     this.victory = false;
-    // был ли клик в этом ходу
-    this.clickThisTurn = false;
+    this.clickInThisTurn = false;
   }
 
   /**
